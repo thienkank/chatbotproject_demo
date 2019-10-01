@@ -19,7 +19,7 @@ handler = WebhookHandler('972fe2410b1815a28ff6a68ac8f410b7') #CHANNEL_SECRET
 def index():
     return render_template("index.html")
 
-@app.route("/callback", methods=['POST'])
+@app.route("/callback", methods=['GET','POST'])
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
@@ -39,10 +39,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    result = word_tokenize(event.message.text, engine='pylexto')
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=result))
+    result=word_tokenize(event.message.text, engine='pylexto')
+    segment="|".join(str(i) for i in result)
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=segment))
 
 if __name__ == "__main__":
     app.run()
