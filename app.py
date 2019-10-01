@@ -1,5 +1,5 @@
 from flask import Flask, request, abort, render_template
-
+from pythainlp import word_tokenize
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -37,13 +37,12 @@ def callback():
 
     return 'OK'
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    result = word_tokenize(event.message.text, engine='pylexto')
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
-
+        TextSendMessage(text=result))
 
 if __name__ == "__main__":
     app.run()
