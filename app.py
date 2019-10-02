@@ -39,7 +39,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    result=word_tokenize(event.message.text, engine='pylexto')
+    # result=word_tokenize(event.message.text, engine='pylexto')
+    result=word_tokenize(event.message.text, engine='newmm')
     segment="|".join(str(i) for i in result)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=segment))
 
