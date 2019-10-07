@@ -10,7 +10,7 @@ def tokenize(sentence):
 
 def response():# definition of the results function
     req = request.get_json(force=True)
-    sentence = req.get('queryResult')
+    sentence = req.get('queryResult').get('action')
     result = {} # an empty dictionary
     result["fulfillmentText"] = tokenize(sentence)
     result = jsonify(result)
