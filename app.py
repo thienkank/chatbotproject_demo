@@ -23,9 +23,9 @@ def index():
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
     # return response()
-    result = {} # an empty dictionary
-    result["fulfillmentText"] = "ปกติ"
-    result = jsonify(result)
+    fulfillmentMessages = {} # an empty dictionary
+    fulfillmentMessages["fulfillmentText" : "ปกติ"]
+    fulfillmentMessages = jsonify(result)
     return make_response(result)# return the result json
 
 if __name__ == "__main__":
