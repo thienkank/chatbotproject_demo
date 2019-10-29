@@ -15,12 +15,6 @@ def response():# definition of the results function
     # result["fulfillmentText"] = tokenize(sentence)
     # result = jsonify(result)
     # return make_response(result)# return the result json
-    data = request.get_json(silent=True)
-    if data['queryResult']['queryText'] == 'ตกลงตามคำตอบทั้งหมด':
-        reply = {
-            "fulfillmentText": "ปกติ",
-        }
-        return jsonify(reply)
 
 @app.route("/")
 def index():
@@ -28,7 +22,13 @@ def index():
 
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
-    return response()
+    # return response()
+    data = request.get_json(silent=True)
+    if data['queryResult']['queryText'] == 'ตกลงตามคำตอบทั้งหมด':
+        reply = {
+            "fulfillmentText": "ปกติ",
+        }
+        return jsonify(reply)
 
 if __name__ == "__main__":
     app.run()
