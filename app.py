@@ -8,7 +8,7 @@ app = Flask(__name__)
 #     tokens="|".join(str(i) for i in words)
 #     return tokens
 
-def response():# definition of the results function
+# def response():# definition of the results function
     # req = request.get_json(force=True)
     # sentence = req.get('queryResult').get('queryText')
     # result = {} # an empty dictionary
@@ -23,12 +23,12 @@ def index():
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
     # return response()
-    data = request.get_json(silent=True)
-    if data['queryResult']['queryText'] == 'ตกลงตามคำตอบทั้งหมด':
-        reply = {
-            "fulfillmentText": "ปกติ",
-        }
-        return jsonify(reply)
+    req = request.get_json(force=True)
+    sentence = req.get('queryResult').get('queryText')
+    result = {} # an empty dictionary
+    result["fulfillmentText"] = "ปกติ"
+    result = jsonify(result)
+    return make_response(result)# return the result json
 
 if __name__ == "__main__":
     app.run()
