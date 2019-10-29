@@ -12,7 +12,7 @@ def response():# definition of the results function
     req = request.get_json(force=True)
     sentence = req.get('queryResult').get('queryText')
     result = {} # an empty dictionary
-    result["fulfillmentMessages"] = tokenize(sentence)
+    result["fulfillmentText"] = tokenize(sentence)
     result = jsonify(result)
     return make_response(result)# return the result json
 
