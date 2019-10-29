@@ -28,7 +28,7 @@ def response():# definition of the results function
 def index():
     return render_template("index.html")
 
-@app.route("/webhook", methods=['POST'])
+@app.route("/webhook", methods=['GET','POST'])
 def webhook():
     return response()
 
