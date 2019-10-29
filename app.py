@@ -23,8 +23,6 @@ def index():
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
     # return response()
-    req = request.get_json(force=True)
-    sentence = req.get('queryResult').get('queryText')
     result = {} # an empty dictionary
     result["fulfillmentText"] = "ปกติ"
     result = jsonify(result)
