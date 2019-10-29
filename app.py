@@ -16,12 +16,13 @@ app = Flask(__name__)
 #     result = jsonify(result)
 #     return make_response(result)# return the result json
 def response():# definition of the results function
-    req = request.get_json(force=True)
-    sentence = req.get('queryResult').get('queryText')
-    result = {} # an empty dictionary
-    result["fulfillmentText"] = sentence+"123"
-    result = jsonify(result)
-    return make_response(result)# return the result json
+    # req = request.get_json(force=True)
+    # sentence = req.get('queryResult').get('queryText')
+    # result = {} # an empty dictionary
+    # result["fulfillmentText"] = sentence+"123"
+    # result = jsonify(result)
+    # return make_response(result)# return the result json
+    return "Hello from Heroku"
 
 @app.route("/")
 def index():
