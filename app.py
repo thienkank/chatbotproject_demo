@@ -22,10 +22,11 @@ def index():
 
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
-    # return response()
-    fulfillmentMessages = {} # an empty dictionary
-    fulfillmentMessages["fulfillmentText" : "ปกติ"]
-    fulfillmentMessages = jsonify(result)
+    req = request.get_json(force=True)
+    sentence = req.get('queryResult').get('queryText')
+    result = {} # an empty dictionary
+    result["fulfillmentText"] = "Hello from Cloud server"
+    result = jsonify(result)
     return make_response(result)# return the result json
 
 if __name__ == "__main__":
