@@ -9,12 +9,12 @@ app = Flask(__name__)
 #     return tokens
 
 # def response():# definition of the results function
-    # req = request.get_json(force=True)
-    # sentence = req.get('queryResult').get('queryText')
-    # result = {} # an empty dictionary
-    # result["fulfillmentText"] = tokenize(sentence)
-    # result = jsonify(result)
-    # return make_response(result)# return the result json
+#     req = request.get_json(force=True)
+#     sentence = req.get('queryResult').get('queryText')
+#     result = {} # an empty dictionary
+#     result["fulfillmentText"] = tokenize(sentence)
+#     result = jsonify(result)
+#     return make_response(result)# return the result json
 
 @app.route("/")
 def index():
@@ -22,12 +22,12 @@ def index():
 
 @app.route("/webhook", methods=['GET','POST'])
 def webhook():
+    # return response()
     req = request.get_json(force=True)
-    sentence = req.get('queryResult').get('queryText')
+    sentence = req.get('queryResult').get('parameters')
     result = {} # an empty dictionary
-    result["fulfillmentText"] = "Hello from Cloud server"
+    result["fulfillmentText"] = sentence
     result = jsonify(result)
     return make_response(result)# return the result json
-
 if __name__ == "__main__":
     app.run()
