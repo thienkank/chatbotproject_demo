@@ -24,7 +24,7 @@ def index():
 def webhook():
     # return response()
     req = request.get_json(force=True)
-    sentence = req.get('queryResult').get('parameters')
+    sentence = req.get('queryResult').get('parameters').get('Event')
     result = {} # an empty dictionary
     result["fulfillmentText"] = sentence
     result = jsonify(result)
