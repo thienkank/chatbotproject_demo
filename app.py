@@ -2,6 +2,7 @@ from flask import Flask, make_response, request, jsonify, render_template
 # from pythainlp import word_tokenize
 
 import pandas as pd
+import pickle
 
 app = Flask(__name__)
 
@@ -57,7 +58,7 @@ def webhook():
         age = 2
     with open(f'model/gift_model_xgboost.pkl', 'rb') as f:
         model = pickle.load(f)
-    input=pd.DataFrame([['event', 'relationship', 'sex', 'age']],names=['event','relationship','sex','age','description','class'])
+    input=pd.DataFrame([['event', 'relationship', 'sex', 'age']],columns=['event','relationship','sex','age','description','class'])
     prediction = model.predict(input)[0]
     if prediction == 0:
         prediction = "เสื้อผ้าผู้ชาย"
