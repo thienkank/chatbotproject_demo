@@ -31,7 +31,7 @@ def webhook():
     sex = req.get('queryResult').get('parameters').get('Sex')
     relationship = req.get('queryResult').get('parameters').get('Relationship')
     age = req.get('queryResult').get('parameters').get('Age')
-    price = req.get('queryResult').get('parameters').get('Price')
+    # price = req.get('queryResult').get('parameters').get('Price')
     if event == 'วาเลนไทน์':
         event = 0
     elif event == 'ปีใหม่':
@@ -58,7 +58,7 @@ def webhook():
         age = 2
     with open(f'model/gift_model_xgboost.pkl', 'rb') as f:
         model = pickle.load(f)
-    input=pd.DataFrame([['event', 'relationship', 'sex', 'age']],columns=['event','relationship','sex','age','description','class'])
+    input=pd.DataFrame([[event, relationship, sex, age]],columns=['event','relationship','sex','age'])
     prediction = model.predict(input)[0]
     if prediction == 0:
         prediction = "เสื้อผ้าผู้ชาย"
