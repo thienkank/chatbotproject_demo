@@ -26,7 +26,7 @@ def webhook():
     req = request.get_json(force=True)
     event = req.get('queryResult').get('parameters').get('Event')
     sex = req.get('queryResult').get('parameters').get('Sex')
-    relationship = req.get('queryResult').get('parameters').get('Relation')
+    relationship = req.get('queryResult').get('parameters').get('Relationship')
     age = req.get('queryResult').get('parameters').get('Age')
     price = req.get('queryResult').get('parameters').get('Price')
     # if event == 'วาเลนไทน์':
@@ -54,7 +54,7 @@ def webhook():
     # else:
     #     age = 2
     result = {} # an empty dictionary
-    result["fulfillmentText"] = event+" "+sex+" "+relationship+" "+age+" "+price
+    result["fulfillmentText"] = relationship
     result = jsonify(result)
     return make_response(result)# return the result json
 if __name__ == "__main__":
