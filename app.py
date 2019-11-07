@@ -1,5 +1,7 @@
 from flask import Flask, make_response, request, jsonify, render_template
-from pythainlp import word_tokenize
+# from pythainlp import word_tokenize
+
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -53,9 +55,57 @@ def webhook():
         age = 1
     else:
         age = 2
-    response=str(event)+" "+str(sex)+" "+str(relationship)+" "+str(age)
+    with open(f'model/gift_model_xgboost.pkl', 'rb') as f:
+        model = pickle.load(f)
+    input=pd.DataFrame([['event', 'relationship', 'sex', 'age']],names=['event','relationship','sex','age','description','class'])
+    prediction = model.predict(input)[0]
+    if prediction == 0:
+        prediction = "เสื้อผ้าผู้ชาย"
+    elif prediction == 1:
+        prediction = "รองเท้าผู้ชาย"
+    elif prediction == 2:
+        prediction = "กระเป๋าผู้ชาย"
+    elif prediction == 3:
+        prediction = "นาฬิกาผู้ชาย"
+    elif prediction == 4:
+        prediction = "แว่นตาผู้ชาย"
+    elif prediction == 5:
+        prediction = "น้ำหอมผู้ชาย"
+    elif prediction == 6:
+        prediction = "เครื่องสำอางผู้ชาย"
+    elif prediction == 7:
+        prediction = "เครื่องประดับผู้ชาย"
+    elif prediction == 8:
+        prediction = "กีฬาผู้ชาย"
+    elif prediction == 9:
+        prediction = "เสื้อผ้าผู้หญิง"
+    elif prediction == 10:
+        prediction = "รองเท้าผู้หญิง"
+    elif prediction == 11:
+        prediction = "กระเป๋าผู้หญิง"
+    elif prediction == 12:
+        prediction = "นาฬิกาผู้หญิง"
+    elif prediction == 13:
+        prediction = "แว่นตาผู้หญิง"
+    elif prediction == 14:
+        prediction = "น้ำหอมผู้หญิง"
+    elif prediction == 15:
+        prediction = "เครื่องสำอางผู้หญิง"
+    elif prediction == 16:
+        prediction = "เครื่องประดับผู้หญิง"
+    elif prediction == 17:
+        prediction = "กีฬาผู้หญิง"
+    elif prediction == 18:
+        prediction = "อุปกรณ์อิเล็กทรอนิกส์"
+    elif prediction == 19:
+        prediction = "กล้อง"
+    elif prediction == 20:
+        prediction = "อุปกรณ์ฟิตเนส"
+    else :
+        prediction = "อาหารสุขภาพ"
+    #response=str(event)+" "+str(sex)+" "+str(relationship)+" "+str(age)
     result = {} # an empty dictionary
-    result["fulfillmentText"] = response
+    result["fulfillmentText"] = prediction
     result = jsonify(result)
     return make_response(result)# return the result json
 if __name__ == "__main__":
