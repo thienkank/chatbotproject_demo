@@ -23,7 +23,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/webhook", methods=['GET','POST'])
+@app.route("/webhook", methods=['POST'])
 def webhook():
     # return response()
     req = request.get_json(force=True)
