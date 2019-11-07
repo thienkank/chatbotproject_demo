@@ -54,7 +54,7 @@ def webhook():
     else:
         age = 2
     result = {} # an empty dictionary
-    result["fulfillmentText"] = event+" "+ sex+" "+relationship+" "+age+" "+price
+    result["fulfillmentText"] = event#+" "+ sex+" "+relationship+" "+age+" "+price
     result = jsonify(result)
     return make_response(result)# return the result json
 if __name__ == "__main__":
