@@ -104,9 +104,9 @@ def webhook():
         prediction = "อุปกรณ์ฟิตเนส"
     else :
         prediction = "อาหารสุขภาพ"
-    #response=str(event)+" "+str(sex)+" "+str(relationship)+" "+str(age)
+    response="ของขวัญที่ได้คือ "+prediction
     result = {} # an empty dictionary
-    result["fulfillmentText"] = prediction
+    result["fulfillmentText"] = response
     result = jsonify(result)
     return make_response(result)# return the result json
 if __name__ == "__main__":
